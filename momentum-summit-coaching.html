@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1b2626">
+<title>Momentum Summit Coaching Rotations</title>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap">
+<style>
+/* Layout: one narrow column, phone first. Brand: charcoal-to-plum ground, mint accent, Montserrat, halftone dot waves. Single dark look by design. */
+:root {
+  --bg-top: #1b2626;
+  --bg-bottom: #2f1d33;
+  --bg: #241f2c;
+  --surface: rgba(255,255,255,.055);
+  --surface-strong: rgba(255,255,255,.09);
+  --ink: #ffffff;
+  --muted: #b9b2c4;
+  --line: rgba(255,255,255,.13);
+  --mint: #74e0c1;
+  --mint-ink: #12221f;
+  --mint-soft: rgba(116,224,193,.14);
+  --plum-dot: #8e6f97;
+  --font: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body {
+  background: var(--bg);
+  background-image: linear-gradient(160deg, var(--bg-top) 0%, var(--bg) 45%, var(--bg-bottom) 100%);
+  background-attachment: fixed;
+  color: var(--ink); font-family: var(--font); font-size: 16px; line-height: 1.45; font-weight: 500;
+  min-height: 100%; position: relative; overflow-x: hidden;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg-top); }
+/* halftone dot waves, echoing the event graphics */
+.dots { position: fixed; pointer-events: none; z-index: 0; }
+.dots.mint { left: -60px; bottom: -40px; width: 340px; height: 260px;
+  background: radial-gradient(circle, var(--mint) 1.3px, transparent 1.8px) 0 0 / 9px 9px;
+  -webkit-mask: radial-gradient(ellipse 70% 60% at 20% 100%, #000 15%, transparent 70%); mask: radial-gradient(ellipse 70% 60% at 20% 100%, #000 15%, transparent 70%); opacity: .7; }
+.dots.plum { right: -80px; top: 40px; width: 300px; height: 520px;
+  background: radial-gradient(circle, var(--plum-dot) 1.1px, transparent 1.6px) 0 0 / 8px 8px;
+  -webkit-mask: radial-gradient(ellipse 45% 60% at 85% 45%, #000 10%, transparent 70%); mask: radial-gradient(ellipse 45% 60% at 85% 45%, #000 10%, transparent 70%); opacity: .55; }
+.wrap { max-width: 560px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); position: relative; z-index: 1; }
+
+/* Masthead */
+.mast .wrap { padding-block: 22px 8px; display: grid; gap: 18px; }
+.topline { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.am { font-weight: 700; font-size: 17px; line-height: .95; letter-spacing: -.01em; }
+.am .toggle { display: inline-block; width: 1.25em; height: .62em; border-radius: 999px; background: #9a9aa3; vertical-align: -.02em; position: relative; margin: 0 .02em; }
+.am .toggle::after { content: ""; position: absolute; right: .06em; top: .06em; width: .5em; height: .5em; border-radius: 50%; background: #e9e9ee; }
+.stack { font-weight: 900; text-transform: uppercase; font-size: 13px; line-height: 1.02; text-align: right; letter-spacing: .02em; }
+.hero h1 { font-weight: 900; font-size: clamp(40px, 13vw, 60px); line-height: .95; letter-spacing: -.02em; margin: 0; color: var(--mint); }
+.hero p { margin: 8px 0 0; font-weight: 800; font-size: clamp(18px, 5.4vw, 24px); line-height: 1.15; }
+.viewing .hero h1 { font-size: 30px; }
+.viewing .hero p { display: none; }
+.hero .meta-line { margin-top: 10px; font-weight: 600; font-size: 13px; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+
+main .wrap { padding-block: 22px 40px; display: grid; gap: 18px; }
+
+/* Picker */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; display: grid; gap: 14px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.step-label { font-weight: 800; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--mint); margin: 0; }
+.roles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.role { appearance: none; font: inherit; font-weight: 800; font-size: 17px; color: var(--ink); background: var(--surface); border: 2px solid var(--line); border-radius: 12px; padding: 14px 12px; cursor: pointer; text-align: left; display: grid; gap: 2px; }
+.role small { font-weight: 500; font-size: 13px; color: var(--muted); }
+.role[aria-pressed="true"] { border-color: var(--mint); background: var(--mint-soft); }
+.role:focus-visible, select:focus-visible, .btn:focus-visible, a:focus-visible, .foot button:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; }
+select { width: 100%; font: inherit; font-size: 17px; font-weight: 600; color: var(--ink); background: var(--bg); border: 2px solid var(--line); border-radius: 12px; padding: 14px 12px; }
+select:disabled { opacity: .5; }
+.btn { appearance: none; font: inherit; font-weight: 800; font-size: 17px; border: 0; border-radius: 12px; padding: 15px 16px; background: var(--mint); color: var(--mint-ink); cursor: pointer; }
+.btn:disabled { opacity: .35; cursor: default; }
+.btn.ghost { background: transparent; color: var(--mint); border: 2px solid var(--line); padding: 10px 14px; font-size: 15px; }
+.note { color: var(--muted); font-size: 14px; margin: 0; }
+
+/* Agenda */
+#agenda, #all { display: grid; gap: 18px; }
+.who { display: grid; gap: 4px; }
+.who .tag { justify-self: start; font-weight: 800; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; background: var(--mint); color: var(--mint-ink); padding: 4px 8px; border-radius: 6px; }
+.who h2 { font-weight: 900; font-size: 30px; line-height: 1.05; margin: 6px 0 0; text-wrap: balance; letter-spacing: -.01em; }
+.who p { margin: 0; color: var(--muted); }
+.tally { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.pill { font-size: 12.5px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--mint-soft); color: var(--mint); }
+
+.rounds { list-style: none; margin: 0; padding: 0; display: grid; }
+.round { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 12px; position: relative; padding-bottom: 14px; }
+.round:not(:last-child)::before { content: ""; position: absolute; left: 23px; top: 48px; bottom: 0; width: 2px; background: repeating-linear-gradient(var(--line) 0 4px, transparent 4px 8px); }
+.num { width: 48px; height: 48px; border-radius: 50%; background: var(--mint); color: var(--mint-ink); display: grid; place-items: center; font-weight: 900; font-size: 22px; font-variant-numeric: tabular-nums; }
+.round.off .num { background: transparent; color: var(--muted); border: 2px dashed var(--line); }
+.slot { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 6px; min-width: 0; }
+.round.off .slot { background: transparent; border-style: dashed; }
+.slot .when { font-weight: 700; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--mint); }
+.round.off .slot .when { color: var(--muted); }
+.slot .name { font-weight: 800; font-size: 20px; line-height: 1.2; }
+.slot .meta { color: var(--muted); font-size: 14px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+.chip { font-size: 12.5px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: var(--surface-strong); color: var(--ink); }
+.chip.ind { background: transparent; border: 1px solid var(--line); color: var(--muted); }
+.goal { font-size: 14px; margin: 2px 0 0; padding-left: 10px; border-left: 3px solid var(--mint); }
+.slot a { color: var(--mint); font-weight: 700; font-size: 14px; text-decoration: none; }
+.slot a:hover { text-decoration: underline; }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* Full grid */
+.grid-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+table { border-collapse: collapse; font-size: 14px; min-width: 620px; width: 100%; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--mint); }
+tbody th { font-weight: 800; white-space: nowrap; }
+tr:last-child td, tr:last-child th { border-bottom: 0; }
+.foot { color: var(--muted); font-size: 13px; text-align: center; padding-bottom: 20px; }
+.foot button { background: none; border: 0; color: var(--mint); font: inherit; font-weight: 700; cursor: pointer; text-decoration: underline; }
+@media (prefers-reduced-motion: no-preference) { .round { animation: rise .35s ease both; } .round:nth-child(2){animation-delay:.05s}.round:nth-child(3){animation-delay:.1s}.round:nth-child(4){animation-delay:.15s} }
+@keyframes rise { from { transform: translateY(6px); } to { transform: none; } }
+</style>
+</head>
+<body>
+<div class="dots mint" aria-hidden="true"></div>
+<div class="dots plum" aria-hidden="true"></div>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="topline">
+      <div class="am" aria-label="Access Mode">access<br>m<span class="toggle"></span>de</div>
+      <div class="stack">Momentum<br>Summit<br>2026</div>
+    </div>
+    <div class="hero">
+      <h1>Speed Coaching</h1>
+      <p>Your rotation for Momentum Summit 2026</p>
+      <div class="meta-line">Nov 6 · MSU CAVEA Theater · 4 rounds</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section id="picker" class="card" aria-labelledby="pick-title">
+      <p class="step-label" id="pick-title">Find your schedule</p>
+      <div class="roles" role="group" aria-label="I am a">
+        <button type="button" class="role" id="role-p" data-role="p" aria-pressed="false">Participant<small>Founders &amp; attendees</small></button>
+        <button type="button" class="role" id="role-c" data-role="c" aria-pressed="false">Coach<small>Speed coaching hosts</small></button>
+      </div>
+      <label class="note" for="name-select">Then pick your name</label>
+      <select id="name-select" disabled>
+        <option value="">Choose Participant or Coach first</option>
+      </select>
+      <button type="button" class="btn" id="go" disabled>Show my rotations</button>
+    </section>
+
+    <section id="agenda" hidden></section>
+    <section id="all" hidden></section>
+
+    <p class="foot">Schedule changes will show up here, so check back between rounds. <button type="button" id="show-all">See all rotations</button></p>
+  </div>
+</main>
+
+<script id="schedule-data" type="application/json">{"rounds":4,"times":["","","",""],"grid":[["Rita Torrico","Andrew Gabler","Bazi Kanani","Shodan D'Souza","Jasmine Motupalli"],["Monica Williams","Raymond Ashieyi-Ahorgah","Roxcee Stacker","Esther Davy","Daisy Sanchez"],["Neil Pollard","Luis Toscano","Sheila Van de Graaph","Jon-Michael Horst","Joy Senyah"],["Erin Onsager","Esther Davy","Joy Senyah","Jennifer Lovegrove","Josh Newell"],["Sherrie Lawson","Jay Anderson","Daisy Sanchez","Raymond Ashieyi-Ahorgah","Roxcee Stacker"],["Tristan Watkins","Jon-Michael Horst","Okechukwu Charles Nwamba","Nikita Bondarenko","Caren Rico"],["Kimberly Bonner","James Truitt","Rob Hill","Jake Henderson","Shelby Mathis"],["Matt Ranta","Shodan D'Souza","Jasmine Motupalli","Luis Toscano","Okechukwu Charles Nwamba"],["Mary Peck","Teresa Dinh","Shelby Mathis","Jay Anderson","Rob Hill"],["Jessica Kagan","Jake Henderson","Josh Newell","Teresa Dinh","Spurgeon Janz"],["Stephen Krieger","Ryan Elghazzali","Caren Rico","Andrew Gabler","Bazi Kanani"],["Kevin Allen","Jennifer Lovegrove","Spurgeon Janz","James Truitt","Haley Featherston"],["Azarel","Nikita Bondarenko","Marie Hart","Erin Beckstein","Sheila Van de Graaph"],["Charles Holloway","Erin Beckstein","Haley Featherston","Ryan Elghazzali","Marie Hart"]],"why":[["Rita Torrico","Business Strategy, Marketing and Customer Growth, Pitching or Storytelling + industry: Tech & Software","Business Strategy + industry: Idea Stage / Student","Business Strategy, Marketing and Customer Growth, Fundraising or Access to Capital + industry: Idea Stage / Student","Business Strategy + industry: Tech & Software"],["Monica Williams","Business Strategy + industry: Professional Services","Business Strategy + industry: Professional Services","Business Strategy","Business Strategy + industry: Professional Services"],["Neil Pollard","Accounting or Financial Guidance, Entrepreneurship, Business Strategy, Sales or Revenue Generation","Entrepreneurship, Business Strategy + industry: Nonprofit & Education","Entrepreneurship, Business Strategy, Sales or Revenue Generation, Pitching or Storytelling + industry: Nonprofit & Education","Entrepreneurship, Business Strategy"],["Erin Onsager","Entrepreneurship, Business Strategy","Entrepreneurship, Business Strategy","Accounting or Financial Guidance, Entrepreneurship, Business Strategy + industry: Construction & Real Estate","Entrepreneurship, Business Strategy + industry: Finance & Banking"],["Sherrie Lawson","Entrepreneurship, Business Strategy + industry: Professional Services","Entrepreneurship, Business Strategy + industry: Professional Services","Entrepreneurship, Business Strategy + industry: Professional Services","Entrepreneurship, Business Strategy + industry: Professional Services"],["Tristan Watkins","Entrepreneurship, Business Strategy, Marketing and Customer Growth, Pitching or Storytelling + industry: Nonprofit & Education","Entrepreneurship, Business Strategy","Entrepreneurship, Business Strategy + industry: Consumer & Personal Services","Entrepreneurship, Business Strategy"],["Kimberly Bonner","Entrepreneurship, Business Strategy, Marketing and Customer Growth, Sales or Revenue Generation, Leadership & Team Development, Fundraising or Access to Capital","Entrepreneurship, Business Strategy + industry: Creative & Arts","Business Strategy, Marketing and Customer Growth, Sales or Revenue Generation, Pitching or Storytelling, Legal + industry: Creative & Arts","Entrepreneurship, Business Strategy + industry: Creative & Arts"],["Matt Ranta","Business Strategy, Marketing and Customer Growth, Sales or Revenue Generation, AI","Business Strategy + industry: Tech & Software","Business Strategy, Marketing and Customer Growth, Sales or Revenue Generation, AI","Business Strategy"],["Mary Peck","Marketing and Customer Growth + industry: Professional Services","industry: Creative & Arts","industry: Professional Services","industry: Creative & Arts"],["Jessica Kagan","Business Strategy, Marketing and Customer Growth, Sales or Revenue Generation, Pitching or Storytelling","Business Strategy + industry: Finance & Banking","Marketing and Customer Growth, Sales or Revenue Generation, Pitching or Storytelling","Business Strategy"],["Stephen Krieger","General Operations","General Operations","Pitching or Storytelling, Market Research","General Operations + industry: Idea Stage / Student"],["Kevin Allen","Accounting or Financial Guidance, Entrepreneurship, Business Strategy, Leadership & Team Development, Fundraising or Access to Capital, AI, General Operations","Entrepreneurship, Business Strategy, General Operations","Entrepreneurship, Business Strategy, Sales or Revenue Generation, Leadership & Team Development, Fundraising or Access to Capital","Entrepreneurship, Business Strategy, General Operations"],["Azarel","Entrepreneurship, Business Strategy + industry: Consumer & Personal Services","Entrepreneurship, Business Strategy","Entrepreneurship, Business Strategy","Entrepreneurship, Business Strategy + industry: Nonprofit & Education"],["Charles Holloway","Entrepreneurship, Business Strategy, General Operations","Entrepreneurship, Business Strategy, General Operations","Entrepreneurship, Business Strategy, General Operations","Entrepreneurship, Business Strategy, General Operations"]],"participants":[{"n":"Raymond Ashieyi-Ahorgah","co":"Capfluent Consulting","ind":"Professional Services","areas":[],"goal":"","li":""},{"n":"Jay Anderson","co":"CO Consulting Group","ind":"Professional Services","areas":[],"goal":"","li":""},{"n":"Erin Beckstein","co":"Thrive Services","ind":"","areas":[],"goal":"","li":""},{"n":"Nikita Bondarenko","co":"Swimming Everywhere","ind":"Consumer & Personal Services","areas":[],"goal":"","li":""},{"n":"Esther Davy","co":"Time to Play","ind":"Tech & Software","areas":[],"goal":"","li":""},{"n":"Teresa Dinh","co":"Dinh Meridian","ind":"Professional Services","areas":["Marketing and Customer Growth","Sales or Revenue Generation","Pitching or Storytelling","AI"],"goal":"To build an AI-powered CRM that we own and manage internally, with automated contact updates, relationship tracking, opportunity identification, and follow-ups","li":"https://www.linkedin.com/in/ptdinh/"},{"n":"Shodan D'Souza","co":"University of Denver (student)","ind":"Idea Stage / Student","areas":["Entrepreneurship","Business Strategy","Marketing and Customer Growth","Sales or Revenue Generation","Fundraising or Access to Capital","AI"],"goal":"Learn AI to scale business","li":""},{"n":"Ryan Elghazzali","co":"Pantre","ind":"","areas":[],"goal":"","li":""},{"n":"Haley Featherston","co":"Blend.Co","ind":"","areas":[],"goal":"","li":""},{"n":"Andrew Gabler","co":"Allograph IO LLC","ind":"Tech & Software","areas":["Business Strategy","Marketing and Customer Growth","Pitching or Storytelling","Market Research"],"goal":"Insights into what led to companies first customer","li":""},{"n":"Marie Hart","co":"Marie + Charlie","ind":"","areas":[],"goal":"","li":""},{"n":"Jake Henderson","co":"Jake & Jubilee Music LLC","ind":"Creative & Arts","areas":["Accounting or Financial Guidance","Business Strategy","Marketing and Customer Growth","Sales or Revenue Generation","Pitching or Storytelling","Legal"],"goal":"A working AI system that handles the busywork of booking for our music duo: finding event leads, drafting quotes and following up with clients. That way we can book more corporate and wedding gigs and spend more of our time making music.","li":""},{"n":"Rob Hill","co":"Rob Hill Art","ind":"Creative & Arts","areas":[],"goal":"","li":""},{"n":"Jon-Michael Horst","co":"Exponential Impact","ind":"Nonprofit & Education","areas":["Entrepreneurship","Business Strategy","Marketing and Customer Growth","Sales or Revenue Generation","Pitching or Storytelling","AI"],"goal":"Learn more about implanting Ai in my role","li":""},{"n":"Spurgeon Janz","co":"Atomic Finch","ind":"","areas":[],"goal":"","li":""},{"n":"Bazi Kanani","co":"Kitso","ind":"Idea Stage / Student","areas":[],"goal":"","li":""},{"n":"Jennifer Lovegrove","co":"Illumi Lighting","ind":"Construction & Real Estate","areas":["Accounting or Financial Guidance","Entrepreneurship","Business Strategy","Leadership & Team Development","Fundraising or Access to Capital","General Operations","AI"],"goal":"A deeper understanding how to unload tasks to AI","li":""},{"n":"Shelby Mathis","co":"Shelby Mathis Creative","ind":"Creative & Arts","areas":[],"goal":"","li":""},{"n":"Jasmine Motupalli","co":"Data Love Co.","ind":"Tech & Software","areas":[],"goal":"","li":""},{"n":"Josh Newell","co":"Better Pockets Financial","ind":"Finance & Banking","areas":[],"goal":"","li":""},{"n":"Okechukwu Charles Nwamba","co":"O-XYZ","ind":"","areas":[],"goal":"","li":""},{"n":"Caren Rico","co":"The Boundless","ind":"","areas":[],"goal":"","li":""},{"n":"Daisy Sanchez","co":"Change Agency","ind":"Professional Services","areas":[],"goal":"","li":""},{"n":"Joy Senyah","co":"Dance With JOY","ind":"Creative & Arts","areas":[],"goal":"","li":""},{"n":"Roxcee Stacker","co":"Revenue Unwritten","ind":"Professional Services","areas":[],"goal":"","li":""},{"n":"Luis Toscano","co":"Mobile Glow Detailing","ind":"Consumer & Personal Services","areas":["Accounting or Financial Guidance","Entrepreneurship","Business Strategy","Marketing and Customer Growth","Sales or Revenue Generation","AI"],"goal":"To learn how to optimize my business with AI but keeping the humane aspect and feel for customers.","li":""},{"n":"James Truitt","co":"Trulvl, Inc.","ind":"","areas":["Entrepreneurship","Business Strategy","Sales or Revenue Generation","Leadership & Team Development","Fundraising or Access to Capital","Marketing and Customer Growth"],"goal":"Networking","li":"https://linkedIn.com/in/jamesktruitt"},{"n":"Sheila Van de Graaph","co":"YouthRoots","ind":"Nonprofit & Education","areas":[],"goal":"","li":""}],"coaches":[{"n":"Rita Torrico","co":"Wildwood Ventures","role":"Investor","areas":["Business Strategy","Marketing and Customer Growth","Pitching or Storytelling","Fundraising or Access to Capital"],"li":"https://www.linkedin.com/in/rita-herzog/"},{"n":"Monica Williams","co":"TIED Leadership Consulting, LLC","role":"CEO and Principal Consultant","areas":["Business Strategy","Leadership & Team Development","Culture and Change Leadership"],"li":"https://www.linkedin.com/in/monica-d-williams-0373766"},{"n":"Neil Pollard","co":"MSU Denver - College of Business","role":"Assistant Professor - Entrepreneurship","areas":["Accounting or Financial Guidance","Entrepreneurship","Business Strategy","Sales or Revenue Generation","Pitching or Storytelling"],"li":"https://www.linkedin.com/in/neil-pollard/"},{"n":"Erin Onsager","co":"Simply Spreadsheets","role":"Founder and CEO","areas":["Accounting or Financial Guidance","Entrepreneurship","Business Strategy"],"li":"https://www.linkedin.com/in/erinonsager"},{"n":"Sherrie Lawson","co":"Epiphanie Consulting LLC","role":"Director of Change Management","areas":["Entrepreneurship","Business Strategy","Leadership & Team Development"],"li":"https://www.linkedin.com/in/sherrie-lawson-6b2106"},{"n":"Tristan Watkins","co":"OEDIT","role":"Director - Business Support","areas":["Entrepreneurship","Business Strategy","Marketing and Customer Growth","Pitching or Storytelling","Government programs"],"li":"https://www.linkedin.com/in/tristanwatkins"},{"n":"Kimberly Bonner","co":"Center for Community Wealth","role":"Small Business Development Manager","areas":["Entrepreneurship","Business Strategy","Marketing and Customer Growth","Sales or Revenue Generation","Pitching or Storytelling","Leadership & Team Development","Fundraising or Access to Capital","Legal"],"li":"https://www.linkedin.com/in/kimberlymariebonner/"},{"n":"Matt Ranta","co":"Nimble Gravity","role":"Director of Delivery","areas":["Business Strategy","Marketing and Customer Growth","Sales or Revenue Generation","Leadership & Team Development","AI"],"li":""},{"n":"Mary Peck","co":"Mary Peck Communications","role":"Communications Advisor & Writer","areas":["Marketing and Customer Growth"],"li":"https://www.linkedin.com/in/marypeckcommunications"},{"n":"Jessica Kagan","co":"BMO Bank","role":"Market President, Business Banking","areas":["Business Strategy","Marketing and Customer Growth","Sales or Revenue Generation","Pitching or Storytelling","Leadership & Team Development"],"li":"https://www.linkedin.com/in/jessica-kagan-714a968a"},{"n":"Stephen Krieger","co":"Access Mode","role":"Program Manager","areas":["Pitching or Storytelling","Market Research","General Operations"],"li":""},{"n":"Kevin Allen","co":"","role":"","areas":["Accounting or Financial Guidance","Entrepreneurship","Business Strategy","Sales or Revenue Generation","Pitching or Storytelling","Leadership & Team Development","Fundraising or Access to Capital","Legal","Culture and Change Leadership","Government programs","AI","Market Research","General Operations"],"li":""},{"n":"Azarel","co":"OEDIT","role":"","areas":["Entrepreneurship","Business Strategy","Government programs"],"li":""},{"n":"Charles Holloway","co":"","role":"","areas":["Entrepreneurship","Business Strategy","General Operations"],"li":""}]}</script>
+<script>
+(function () {
+  var D = JSON.parse(document.getElementById('schedule-data').textContent);
+  var OFF = 'Off Rotation', OPEN = 'Open (walk-in)';
+  var P = {}, C = {};
+  D.participants.forEach(function (p) { P[p.n] = p; });
+  D.coaches.forEach(function (c) { C[c.n] = c; });
+
+  var slug = function (s) { return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]; }); };
+  var whenLabel = function (r) { return 'Round ' + (r + 1) + (D.times[r] ? ' · ' + D.times[r] : ''); };
+  var byFirst = function (a, b) { return a.localeCompare(b); };
+
+  var picker = document.getElementById('picker'), agenda = document.getElementById('agenda'), all = document.getElementById('all');
+  var sel = document.getElementById('name-select'), go = document.getElementById('go');
+  var role = '';
+
+  function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function load(k) { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } }
+
+  function setRole(r) {
+    role = r;
+    ['p', 'c'].forEach(function (x) { document.getElementById('role-' + x).setAttribute('aria-pressed', String(x === r)); });
+    var names = (r === 'p' ? D.participants : D.coaches).map(function (x) { return x.n; }).sort(byFirst);
+    sel.innerHTML = '<option value="">Select your name</option>' + names.map(function (n) { return '<option value="' + esc(n) + '">' + esc(n) + '</option>'; }).join('');
+    sel.disabled = false; go.disabled = true;
+  }
+  document.querySelectorAll('.role').forEach(function (b) { b.addEventListener('click', function () { setRole(b.dataset.role); sel.focus(); }); });
+  sel.addEventListener('change', function () { go.disabled = !sel.value; });
+  go.addEventListener('click', function () { if (sel.value) location.hash = role + '-' + slug(sel.value); });
+  document.getElementById('show-all').addEventListener('click', function () { location.hash = 'all-rotations'; });
+
+  function chips(list, cls) { return list.map(function (a) { return '<span class="chip' + (cls ? ' ' + cls : '') + '">' + esc(a) + '</span>'; }).join(''); }
+  function whyChips(text) {
+    if (!text || text.indexOf('Balance') === 0) return '';
+    var parts = text.split(' + '), out = [];
+    parts.forEach(function (t) {
+      if (t.indexOf('industry: ') === 0) out.push('<span class="chip ind">Same industry: ' + esc(t.slice(10)) + '</span>');
+      else t.split(', ').forEach(function (a) { if (a) out.push('<span class="chip">' + esc(a) + '</span>'); });
+    });
+    return out.length ? '<div class="meta">Matched on</div><div class="chips">' + out.join('') + '</div>' : '';
+  }
+  function liLink(url, name) { return url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(name.split(' ')[0]) + ' on LinkedIn ↗</a>' : ''; }
+  function actions() { return '<div class="actions"><button type="button" class="btn ghost" data-back>← Pick a different name</button></div>'; }
+
+  function participantView(name) {
+    var p = P[name]; if (!p) return false;
+    var count = 0, items = '';
+    for (var r = 0; r < D.rounds; r++) {
+      var ci = -1;
+      D.grid.forEach(function (row, i) { if (row[r + 1] === name) ci = i; });
+      if (ci < 0) {
+        items += '<li class="round off"><div class="num">' + (r + 1) + '</div><div class="slot"><div class="when">' + esc(whenLabel(r)) + '</div><div class="name">Off rotation</div><div class="meta">No coaching session this round.</div></div></li>';
+      } else {
+        count++;
+        var c = C[D.grid[ci][0]] || { n: D.grid[ci][0], co: '', role: '', li: '' };
+        items += '<li class="round"><div class="num">' + (r + 1) + '</div><div class="slot"><div class="when">' + esc(whenLabel(r)) + ' · Your coach</div><div class="name">' + esc(c.n) + '</div><div class="meta">' + esc([c.role, c.co].filter(Boolean).join(', ')) + '</div>' + whyChips(D.why[ci][r + 1]) + liLink(c.li, c.n) + '</div></li>';
+      }
+    }
+    agenda.innerHTML = '<div class="who"><span class="tag">Participant</span><h2>' + esc(p.n) + '</h2><p>' + esc(p.co) + '</p><div class="tally"><span class="pill">' + count + ' of ' + D.rounds + ' rounds with a coach</span></div></div><ol class="rounds">' + items + '</ol>' + actions();
+    return true;
+  }
+
+  function coachView(name) {
+    var ci = -1; D.grid.forEach(function (row, i) { if (row[0] === name) ci = i; });
+    var c = C[name]; if (!c || ci < 0) return false;
+    var items = '';
+    for (var r = 0; r < D.rounds; r++) {
+      var who = D.grid[ci][r + 1];
+      if (!who || who === OPEN) {
+        items += '<li class="round off"><div class="num">' + (r + 1) + '</div><div class="slot"><div class="when">' + esc(whenLabel(r)) + '</div><div class="name">Open seat</div><div class="meta">Take a walk-in participant.</div></div></li>';
+        continue;
+      }
+      var p = P[who] || { n: who, co: '', ind: '', areas: [], goal: '', li: '' };
+      items += '<li class="round"><div class="num">' + (r + 1) + '</div><div class="slot"><div class="when">' + esc(whenLabel(r)) + ' · You\'re meeting</div><div class="name">' + esc(p.n) + '</div><div class="meta">' + esc([p.co, p.ind].filter(Boolean).join(' · ')) + '</div>' +
+        (p.areas.length ? '<div class="meta">Wants coaching in</div><div class="chips">' + chips(p.areas) + '</div>' : '<div class="meta">No pre-event survey. Start by asking what they’re working on.</div>') +
+        (p.goal ? '<p class="goal">' + esc(p.goal) + '</p>' : '') + liLink(p.li, p.n) + '</div></li>';
+    }
+    agenda.innerHTML = '<div class="who"><span class="tag">Coach</span><h2>' + esc(c.n) + '</h2><p>' + esc([c.role, c.co].filter(Boolean).join(', ')) + '</p><div class="tally">' + c.areas.map(function (a) { return '<span class="pill">' + esc(a) + '</span>'; }).join('') + '</div></div><ol class="rounds">' + items + '</ol>' + actions();
+    return true;
+  }
+
+  function allView() {
+    var head = '<tr><th scope="col">Coach</th>' + Array.from({ length: D.rounds }, function (_, r) { return '<th scope="col">' + esc(whenLabel(r)) + '</th>'; }).join('') + '</tr>';
+    var body = D.grid.map(function (row) { return '<tr><th scope="row">' + esc(row[0]) + '</th>' + row.slice(1).map(function (v) { return '<td>' + esc(v) + '</td>'; }).join('') + '</tr>'; }).join('');
+    all.innerHTML = '<div class="who"><span class="tag">All rotations</span><h2>Coaches by round</h2><p>Anyone not listed in a round is off rotation.</p></div><div class="grid-scroll"><table><thead>' + head + '</thead><tbody>' + body + '</tbody></table></div>' + actions();
+  }
+
+  function route() {
+    var h = decodeURIComponent(location.hash.slice(1));
+    picker.hidden = agenda.hidden = all.hidden = true;
+    document.body.classList.toggle('viewing', !!h);
+    if (h === 'all-rotations') { allView(); all.hidden = false; window.scrollTo(0, 0); return; }
+    var m = /^(p|c)-(.+)$/.exec(h), ok = false;
+    if (m) {
+      var list = m[1] === 'p' ? D.participants : D.coaches;
+      var hit = list.filter(function (x) { return slug(x.n) === m[2]; })[0];
+      if (hit) { ok = m[1] === 'p' ? participantView(hit.n) : coachView(hit.n); if (ok) store('ms-last', h); }
+    }
+    if (ok) { agenda.hidden = false; window.scrollTo(0, 0); } else { picker.hidden = false; document.body.classList.remove('viewing'); }
+  }
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-back]')) { store('ms-last', ''); location.hash = ''; document.body.classList.remove('viewing'); picker.hidden = false; agenda.hidden = all.hidden = true; }
+  });
+  window.addEventListener('hashchange', route);
+
+  if (!location.hash) { var last = load('ms-last'); if (last) { location.hash = last; return; } }
+  route();
+})();
+</script>
+</body>
+</html>

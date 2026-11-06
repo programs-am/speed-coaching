@@ -153,6 +153,7 @@ tr:last-child td, tr:last-child th { border-bottom: 0; }
         <option value="">Choose Participant or Coach first</option>
       </select>
       <button type="button" class="btn" id="go" disabled>Show my rotations</button>
+      <div id="resume" hidden></div>
     </section>
 
     <section id="agenda" hidden></section>
@@ -262,6 +263,15 @@ tr:last-child td, tr:last-child th { border-bottom: 0; }
       }).join('') + actions();
   }
 
+  function showResume() {
+    var el = document.getElementById('resume'), last = load('ms-last'), m = /^(p|c)-(.+)$/.exec(last), hit = null;
+    if (m) hit = (m[1] === 'p' ? D.participants : D.coaches).filter(function (x) { return slug(x.n) === m[2]; })[0];
+    if (!hit) { el.hidden = true; el.innerHTML = ''; return; }
+    el.innerHTML = '<button type="button" class="btn ghost" id="resume-btn">Back to ' + esc(hit.n) + '\u2019s schedule</button>';
+    el.hidden = false;
+    document.getElementById('resume-btn').addEventListener('click', function () { location.hash = last; });
+  }
+
   function route() {
     var h = decodeURIComponent(location.hash.slice(1));
     picker.hidden = agenda.hidden = all.hidden = true;
@@ -274,14 +284,13 @@ tr:last-child td, tr:last-child th { border-bottom: 0; }
       var hit = list.filter(function (x) { return slug(x.n) === m[2]; })[0];
       if (hit) { ok = m[1] === 'p' ? participantView(hit.n) : coachView(hit.n); if (ok) store('ms-last', h); }
     }
-    if (ok) { agenda.hidden = false; window.scrollTo(0, 0); } else { picker.hidden = false; document.body.classList.remove('viewing'); }
+    if (ok) { agenda.hidden = false; window.scrollTo(0, 0); } else { picker.hidden = false; document.body.classList.remove('viewing'); showResume(); }
   }
   document.addEventListener('click', function (e) {
-    if (e.target.closest('[data-back]')) { store('ms-last', ''); location.hash = ''; document.body.classList.remove('viewing'); picker.hidden = false; agenda.hidden = all.hidden = true; }
+    if (e.target.closest('[data-back]')) { location.hash = ''; document.body.classList.remove('viewing'); showResume(); picker.hidden = false; agenda.hidden = all.hidden = true; }
   });
   window.addEventListener('hashchange', route);
 
-  if (!location.hash) { var last = load('ms-last'); if (last) { location.hash = last; return; } }
   route();
 })();
 </script>

@@ -105,8 +105,6 @@ select:disabled { opacity: .5; }
 .slot a { color: var(--mint); font-weight: 700; font-size: 14px; text-decoration: none; }
 .slot a:hover { text-decoration: underline; }
 .stack-cards { display: grid; gap: 18px; }
-.teaser { gap: 10px; }
-.teaser-text { margin: 0; color: var(--muted); font-size: 15px; }
 .filter { display: grid; gap: 6px; }
 .filter label { font-size: 13px; color: var(--muted); font-weight: 600; }
 .coach-card .links { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 2px; }
@@ -162,19 +160,13 @@ tr:last-child td, tr:last-child th { border-bottom: 0; }
         <option value="">Choose Participant or Coach first</option>
       </select>
       <button type="button" class="btn" id="go" disabled>Show my rotations</button>
-      <div id="resume" hidden></div>
       </div>
-      <div class="card teaser">
-        <p class="step-label">Coach lookbook</p>
-        <p class="teaser-text">Bios and expertise for all 16 coaches. Filter by topic to see who can help with what.</p>
-        <button type="button" class="btn ghost" id="open-lookbook">Browse the coaches</button>
-      </div>
-    </section>
+</section>
 
     <section id="agenda" hidden></section>
     <section id="all" hidden></section>
 
-    <p class="foot">Schedule changes will show up here, so check back between rounds. <button type="button" id="show-coaches">Meet the coaches</button> · <button type="button" id="show-all">See all rotations</button></p>
+    <p class="foot">Schedule changes will show up here, so check back between rounds. <button type="button" id="show-all">See all rotations</button></p>
   </div>
 </main>
 
@@ -210,8 +202,6 @@ tr:last-child td, tr:last-child th { border-bottom: 0; }
   sel.addEventListener('change', function () { go.disabled = !sel.value; });
   go.addEventListener('click', function () { if (sel.value) location.hash = role + '-' + slug(sel.value); });
   document.getElementById('show-all').addEventListener('click', function () { location.hash = 'all-rotations'; });
-  document.getElementById('show-coaches').addEventListener('click', function () { location.hash = 'coaches'; });
-  document.getElementById('open-lookbook').addEventListener('click', function () { location.hash = 'coaches'; });
 
   function chips(list, cls) { return list.map(function (a) { return '<span class="chip' + (cls ? ' ' + cls : '') + '">' + esc(a) + '</span>'; }).join(''); }
   function whyChips(text) {
@@ -269,60 +259,23 @@ tr:last-child td, tr:last-child th { border-bottom: 0; }
     all.innerHTML = '<div class="who"><span class="tag">All rotations</span><h2>Coaches by round</h2><p>Anyone not listed in a round is off rotation.</p></div><div class="grid-scroll"><table><thead>' + head + '</thead><tbody>' + body + '</tbody></table></div>' + actions();
   }
 
-  function coachCard(c) {
-    var links = [];
-    if (c.web) links.push('<a href="https://' + esc(c.web) + '" target="_blank" rel="noopener">' + esc(c.web) + ' ↗</a>');
-    if (c.li) links.push(liLink(c.li, c.n));
-    links.push('<a href="#c-' + slug(c.n) + '">' + esc(c.n.split(' ')[0]) + '’s rotation →</a>');
-    return '<div class="slot coach-card"><div class="name">' + esc(c.n) + '</div>' + (c.role || c.co ? '<div class="meta">' + esc([c.role, c.co].filter(Boolean).join(' · ')) + '</div>' : '') +
-      '<div class="chips">' + chips(c.areas) + '</div>' + (c.bio ? '<p class="bio">' + esc(c.bio) + '</p>' : '') +
-      '<div class="links">' + links.join('') + '</div></div>';
-  }
 
-  function lookbookView() {
-    var list = D.coaches.slice().sort(function (a, b) { return a.n.localeCompare(b.n); });
-    var areas = [];
-    list.forEach(function (c) { c.areas.forEach(function (a) { if (areas.indexOf(a) < 0) areas.push(a); }); });
-    areas.sort();
-    all.innerHTML = '<div class="who"><span class="tag">Lookbook</span><h2>Meet the coaches</h2><p>' + list.length + ' coaches across ' + D.rounds + ' rounds of speed coaching.</p></div>' +
-      '<div class="filter"><label for="area-filter">Find a coach for</label><select id="area-filter"><option value="">Any topic</option>' +
-      areas.map(function (a) { return '<option value="' + esc(a) + '">' + esc(a) + '</option>'; }).join('') + '</select></div>' +
-      '<p class="count" id="lb-count"></p><div id="lb-list" class="stack-cards"></div>' + actions();
-    var f = document.getElementById('area-filter');
-    function draw() {
-      var shown = list.filter(function (c) { return !f.value || c.areas.indexOf(f.value) >= 0; });
-      document.getElementById('lb-count').textContent = f.value ? shown.length + ' of ' + list.length + ' coaches cover ' + f.value + '.' : '';
-      document.getElementById('lb-list').innerHTML = shown.map(coachCard).join('');
-    }
-    f.addEventListener('change', draw);
-    draw();
-  }
-
-  function showResume() {
-    var el = document.getElementById('resume'), last = load('ms-last'), m = /^(p|c)-(.+)$/.exec(last), hit = null;
-    if (m) hit = (m[1] === 'p' ? D.participants : D.coaches).filter(function (x) { return slug(x.n) === m[2]; })[0];
-    if (!hit) { el.hidden = true; el.innerHTML = ''; return; }
-    el.innerHTML = '<button type="button" class="btn ghost" id="resume-btn">Back to ' + esc(hit.n) + '\u2019s schedule</button>';
-    el.hidden = false;
-    document.getElementById('resume-btn').addEventListener('click', function () { location.hash = last; });
-  }
 
   function route() {
     var h = decodeURIComponent(location.hash.slice(1));
     picker.hidden = agenda.hidden = all.hidden = true;
     document.body.classList.toggle('viewing', !!h);
     if (h === 'all-rotations') { allView(); all.hidden = false; window.scrollTo(0, 0); return; }
-    if (h === 'coaches') { lookbookView(); all.hidden = false; window.scrollTo(0, 0); return; }
     var m = /^(p|c)-(.+)$/.exec(h), ok = false;
     if (m) {
       var list = m[1] === 'p' ? D.participants : D.coaches;
       var hit = list.filter(function (x) { return slug(x.n) === m[2]; })[0];
-      if (hit) { ok = m[1] === 'p' ? participantView(hit.n) : coachView(hit.n); if (ok) store('ms-last', h); }
+      if (hit) { ok = m[1] === 'p' ? participantView(hit.n) : coachView(hit.n); }
     }
-    if (ok) { agenda.hidden = false; window.scrollTo(0, 0); } else { picker.hidden = false; document.body.classList.remove('viewing'); showResume(); }
+    if (ok) { agenda.hidden = false; window.scrollTo(0, 0); } else { picker.hidden = false; document.body.classList.remove('viewing'); }
   }
   document.addEventListener('click', function (e) {
-    if (e.target.closest('[data-back]')) { location.hash = ''; document.body.classList.remove('viewing'); showResume(); picker.hidden = false; agenda.hidden = all.hidden = true; }
+    if (e.target.closest('[data-back]')) { location.hash = ''; document.body.classList.remove('viewing'); picker.hidden = false; agenda.hidden = all.hidden = true; }
   });
   window.addEventListener('hashchange', route);
 
